@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <style>
+    .radio {
+      padding-left: 10px;
+      font-size: 20px;
+    }
+
+    .years,
+    .height,
+    .weight {
+      padding-bottom: 20px;
+      padding-left: 5px;
+    }
+
+    .age {
+      margin-left: 0;
+      padding-left: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
+    #cal {
+      color: rgb(27, 192, 27);
+    }
+
+    body {
+      background-image: url("/Public/images/image3.jpg");
+      background-size: cover;
+    }
+  </style>
+  <script type="text/javascript">
+    function CalculateClick() {
+      var age = parseInt(document.getElementById("textYears").value);
+      var status = document.getElementById("status");
+      var weight = parseFloat(document.getElementById("weight").value);
+      var height = parseFloat(document.getElementById("height").value) / 100; // convert height to meters
+      var BH = height * height;
+      var BMI = weight / BH;
+      document.getElementById("Result").innerHTML = Math.round(BMI);
+
+      if (BMI < 18) {
+        document.getElementById("YourBMI").innerHTML = "Under Weight";
+        document.getElementById("Normal").innerHTML = "You Are Under Weight";
+        status.style.marginLeft = "50px";
+
+      } else if (BMI >= 18 && BMI < 25) {
+        document.getElementById("YourBMI").innerHTML = "Normal Weight";
+        document.getElementById("Normal").innerHTML = "You Are Normal Weight";
+        status.style.marginLeft = "150px";
+      } else if (BMI >= 25 && BMI < 30) {
+        document.getElementById("YourBMI").innerHTML = "Over Weight";
+        document.getElementById("Normal").innerHTML = "You Are Over Weight";
+        status.style.marginLeft = "250px";
+      } else {
+        document.getElementById("YourBMI").innerHTML = "Obesity";
+        document.getElementById("Normal").innerHTML = "You Are Obese";
+        status.style.marginLeft = "350px";
+      }
+    }
+  </script>
+</head>
+
+<body class="container-fluid">
+  <div class="bg-light text-dark p-4 m-4">
+    <div class="fs-5 text-center" id="cal">
+      <h1>BMI CALCULATOR</h1>
+    </div>
+
+    <div class="row my-3 text-center">
+      <div class="col">
+        <div class="radio">
+          <input type="radio" name="gender" id="male"> Male
+          <input type="radio" name="gender" id="female"> Female
+        </div>
+      </div>
+    </div>
+    <div class="age">Age (1 year or above) *
+      <div class="years">
+        <input type="text" size="16" id="textYears" class="form-control" placeholder="years">
+        <div class="d-flex justify-content-between"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col-sm-6 height">
+          <span>Height * <input type="text" size="16" class="form-control" placeholder="Cm" id="height"></span>
+        </div>
+        <div class="col-sm-6 weight">
+          <span>Weight *<input type="text" size="16" class="form-control" placeholder="Kg" id="weight"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row my-4">
+      <div class="col text-center">
+        <button onclick="CalculateClick()" class="btn btn-primary">Calculate</button>
+      </div>
+    </div>
+    <div class="row my-4">
+      <div id="Result" class="text-center text-dark fs-10"></div>
+    </div>
+    <div>
+      <div class="mt-4 progress">
+        <div class="progress-bar bg-dark me-1" id="YourBMI" style="width:25%">Under Weight</div>
+        <div class="progress-bar bg-success me-1" id="Normal" style="width:25%">Normal Weight</div>
+        <div class="progress-bar bg-warning me-1" id="over" style="width:25%">Over Weight</div>
+        <div class="progress-bar bg-danger me-1" style="width:25%">Obese</div>
+      </div>
+      <div class="bi bi-triangle-fill" id="status">You
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
